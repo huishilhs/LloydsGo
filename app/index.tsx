@@ -5,7 +5,7 @@ export default function LandingPage() {
   return (
     <View>
       <Text>Welcome to the App!</Text>
-      <Link href="/(tabs)">Go to Tabs</Link>
+      <Link href="/(tabs)/home">Go to Tabs</Link>
     </View>
   );
 }

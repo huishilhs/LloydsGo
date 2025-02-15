@@ -1,9 +1,11 @@
 import { Tabs } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function TabsLayout() {
   return (
-    <Tabs>
+    <Tabs screenOptions={{
+      tabBarActiveTintColor: '#6CF478',
+    }}>
       <Tabs.Screen
         name="home/index" // Maps to app/(tabs)/home/index.tsx
         options={{
