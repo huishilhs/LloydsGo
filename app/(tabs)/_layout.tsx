@@ -1,43 +1,52 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+export default function TabsLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+    <Tabs>
       <Tabs.Screen
-        name="index"
+        name="home/index" // Maps to app/(tabs)/home/index.tsx
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" color={color} size={size} />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="rewards/index" // Maps to app/(tabs)/rewards/index.tsx
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Rewards',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="gift" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="lifego/index" // Maps to app/(tabs)/lifego/index.tsx
+        options={{
+          title: 'LifeGo',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="rocket" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="ai/index" // Maps to app/(tabs)/ai/index.tsx
+        options={{
+          title: 'AI',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="chatbubbles" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="invest/index" // Maps to app/(tabs)/invest/index.tsx
+        options={{
+          title: 'Invest',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="trending-up" color={color} size={size} />
+          ),
         }}
       />
     </Tabs>
