@@ -10,6 +10,7 @@ export default function TabsLayout() {
         name="home/index" // Maps to app/(tabs)/home/index.tsx
         options={{
           title: 'Home',
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={size} />
           ),
@@ -19,6 +20,7 @@ export default function TabsLayout() {
         name="rewards/index" // Maps to app/(tabs)/rewards/index.tsx
         options={{
           title: 'Rewards',
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="gift" color={color} size={size} />
           ),
@@ -28,6 +30,7 @@ export default function TabsLayout() {
         name="lifego/index" // Maps to app/(tabs)/lifego/index.tsx
         options={{
           title: 'LifeGo',
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="rocket" color={color} size={size} />
           ),
@@ -37,6 +40,7 @@ export default function TabsLayout() {
         name="ai/index" // Maps to app/(tabs)/ai/index.tsx
         options={{
           title: 'AI',
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="chatbubbles" color={color} size={size} />
           ),
@@ -46,6 +50,7 @@ export default function TabsLayout() {
         name="invest/index" // Maps to app/(tabs)/invest/index.tsx
         options={{
           title: 'Invest',
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="trending-up" color={color} size={size} />
           ),
