@@ -6,13 +6,17 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
+  Button
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Greeting from '@/components/Greeting';
 import BalanceCard from '../../components/BalanceCard';
 import SpendInsightsCard from '@/components/SpendInsightsCard';
 import MilestoneFundsCard from '@/components/MilestoneFundsCard';
+import SpendingInsights from './spending-insights';
+import { supabase } from '../../lib/supabase'
+import { useRouter } from 'expo-router';
 
 const HomePage = () => {
   const userName = 'Matthew. W';
@@ -20,11 +24,12 @@ const HomePage = () => {
   const currency = '£'; // or '$' if needed
   const monthlySavings = 101.46;
   const yearlySavings = 1307.52;
-
+  const router = useRouter();
   return (
      <ScrollView style={styles.container} contentContainerStyle={{ padding: 16 }}>
       {/* Header / Greeting */}
       <Greeting username='John' avatarUrl='' />
+      <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
 
       {/* Spending Score */}
       <View style={styles.spendingScoreContainer}>
@@ -45,6 +50,35 @@ const HomePage = () => {
 
       {/* Milestone Funds */}
       <MilestoneFundsCard />
+
+      <View style={styles.container}>
+      {/* Debt Controls Card */}
+      <TouchableOpacity style={styles.card} onPress={() => router.navigate('/home/spending-insights')}>
+        {/* Left side: title + subtitle */}
+        <View style={styles.textWrapper}>
+          <Text style={styles.title}>Debt Controls</Text>
+          <Text style={styles.subtitle}>Analyse your Debts in One Place</Text>
+        </View>
+        {/* Right side: icon + arrow */}
+        <View style={styles.iconRow}>
+          <Ionicons name="pie-chart-outline" size={40} color="#333" style={styles.mainIcon} />
+          <Ionicons name="arrow-forward" size={24} color="#333" />
+        </View>
+      </TouchableOpacity>
+
+      {/* Earn Rewards Card */}
+      <TouchableOpacity style={styles.card} onPress={() => router.navigate('/rewards')}>
+        <View style={styles.textWrapper}>
+          <Text style={styles.title}>Earn Rewards!</Text>
+          <Text style={styles.subtitle}>Start saving Money Today!</Text>
+        </View>
+        <View style={styles.iconRow}>
+          <Ionicons name="gift-outline" size={40} color="#333" style={styles.mainIcon} />
+          <Ionicons name="arrow-forward" size={24} color="#333" />
+        </View>
+      </TouchableOpacity>
+    </View>
+
     </ScrollView>
   );
 };
@@ -206,6 +240,42 @@ const styles = StyleSheet.create({
   fundGoalValue: {
     fontSize: 14,
     fontWeight: 'bold',
+  },
+  textWrapper: {
+    flex: 1, // ensures text takes available space on the left
+    marginRight: 12,
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 4,
+  },
+  subtitle: {
+    fontSize: 14,
+    color: '#666',
+  },
+  iconRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  mainIcon: {
+    marginRight: 8,
+  },
+  card: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    borderRadius: 12,
+    padding: 16,
+    marginVertical: 8,
+    // optional shadow/elevation
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 1,
   },
 });
 

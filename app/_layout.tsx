@@ -1,39 +1,64 @@
 import React, { useState, useEffect } from 'react';
-import { Stack, Tabs } from 'expo-router';
+import { Stack, Tabs, Redirect } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Session } from '@supabase/supabase-js';
 import Auth from '../components/Auth'; // your login screen component
-import { LogBox } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
-import { supabase } from '../lib/supabase'
+import { supabase } from '../lib/supabase';
 
 export default function RootLayout() {
   const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
-    // On first mount, check for existing session
+    // On first mount, check for an existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
 
-    // Listen for future auth changes
-    supabase.auth.onAuthStateChange((_event, session) => {
+    // Listen for future auth state changes
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
+
+    // Periodically check session validity (every minute)
+    const interval = setInterval(async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        // Clear session if the token is expired or session is invalid
+        setSession(null);
+      }
+    }, 60000);
+
+    // Clean up listener and interval on unmount
+    return () => {
+      authListener?.subscription?.unsubscribe();
+      clearInterval(interval);
+    };
   }, []);
 
+  // Show loading indicator while checking authentication
+  // if (isLoading) {
+  //   return (
+  //     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  //       <ActivityIndicator size="large" color="#6CF478" />
+  //     </View>
+  //   );
+  // }
+
+  // Redirect to auth page if no session
   if (!session) {
-    // If there's no session, show your Auth (login) screen
-    // Option A: Return the Auth component directly:
+    // Use Redirect component for Expo Router navigation
     return <Auth />;
   }
+
+
   return (
-    <Tabs screenOptions={{
-      tabBarActiveTintColor: '#6CF478',
-    }}>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: '#6CF478',
+      }}
+    >
       <Tabs.Screen
-        name="home/index" // Maps to app/(tabs)/home/index.tsx
+        name="home" // Maps to app/(tabs)/home/index.tsx
         options={{
           title: 'Home',
           headerShown: false,
