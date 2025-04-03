@@ -26,7 +26,7 @@ const HomePage = () => {
   const yearlySavings = 1307.52;
   const router = useRouter();
   return (
-     <ScrollView style={styles.container} contentContainerStyle={{ padding: 16 }}>
+     <ScrollView style={styles.container} contentContainerStyle={{ paddingLeft: 16, paddingRight: 16, paddingTop: 45 }}>
       {/* Header / Greeting */}
       <Greeting username='John' avatarUrl='' />
       <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />

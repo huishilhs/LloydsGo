@@ -68,7 +68,7 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
-        name="rewards/index" // Maps to app/(tabs)/rewards/index.tsx
+        name="rewards" // Maps to app/(tabs)/rewards/index.tsx
         options={{
           title: 'Rewards',
           headerShown: false,
