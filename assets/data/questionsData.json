@@ -1,0 +1,230 @@
+[
+  {
+    "course": "budgeting",
+    "questions": [
+      {
+        "question": "What is the 50/30/20 rule?",
+        "answers": [
+          "50% Savings, 30% Investments, 20% Spending",
+          "50% Needs, 30% Wants, 20% Saving",
+          "50% Fun, 30% Groceries, 20% Shopping",
+          "50% Bills, 30% Emergency, 20% Travel"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "How can budgeting help you?",
+        "answers": [
+          "Achieve financial freedom",
+          "Improve spending habits",
+          "Reduce debt",
+          "All of the above"
+        ],
+        "correctAnswerIndex": 3
+      },
+      {
+        "question": "Which of the following is a 'need'?",
+        "answers": [
+          "Netflix subscription",
+          "New iPhone",
+          "Monthly rent",
+          "Concert tickets"
+        ],
+        "correctAnswerIndex": 2
+      }
+    ]
+  },
+  {
+    "course": "saving",
+    "questions": [
+      {
+        "question": "Why is an emergency fund important?",
+        "answers": [
+          "To invest in the stock market",
+          "To cover unexpected expenses like medical bills or car repairs",
+          "To buy luxury items",
+          "To take advantage of sales"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Where is the best place to keep an emergency fund?",
+        "answers": [
+          "In cash under your bed",
+          "In a high-yield savings account",
+          "In the stock market",
+          "In crypto"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "course": "debt",
+    "questions": [
+      {
+        "question": "What does APR stand for?",
+        "answers": [
+          "Annual Percentage Rate",
+          "Account Payment Ratio",
+          "Advanced Profit Return",
+          "Automated Personal Refund"
+        ],
+        "correctAnswerIndex": 0
+      },
+      {
+        "question": "True or False: A high credit score helps you get better loan rates.",
+        "answers": [
+          "True",
+          "False"
+        ],
+        "correctAnswerIndex": 0
+      },
+      {
+        "question": "If you have $1,000 debt with 20% interest, how much after one year (unpaid)?",
+        "answers": [
+          "$1,100",
+          "$1,200",
+          "$1,500",
+          "$2,000"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "course": "investment",
+    "questions": [
+      {
+        "question": "What is compound interest?",
+        "answers": [
+          "Interest on your savings only",
+          "Interest on both your savings and previously earned interest",
+          "An interest rate that doesn't change",
+          "A tax-free return"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "What is the safest way to grow money long-term?",
+        "answers": [
+          "Day trading stocks",
+          "Buying lottery tickets",
+          "Investing in index funds",
+          "Keeping cash under your mattress"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "If you invest $1,000 at 7% annually for 10 years, how much will you have?",
+        "answers": [
+          "$1,500",
+          "$2,000",
+          "$1,967",
+          "$2,500"
+        ],
+        "correctAnswerIndex": 2
+      }
+    ]
+  },
+  {
+    "course": "retirement",
+    "questions": [
+      {
+        "question": "What is the benefit of starting to invest early for retirement?",
+        "answers": [
+          "Higher short-term returns",
+          "More compound interest growth over time",
+          "You can spend more today",
+          "Avoid paying taxes"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which of these is a retirement account?",
+        "answers": [
+          "401(k)",
+          "High-Yield Savings Account",
+          "Checking Account",
+          "Student Loan"
+        ],
+        "correctAnswerIndex": 0
+      }
+    ]
+  },
+  {
+    "course": "taxes",
+    "questions": [
+      {
+        "question": "What is inflation?",
+        "answers": [
+          "An increase in stock prices",
+          "The government giving out free money",
+          "An increase in the overall price of goods/services",
+          "A type of bank fee"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which is NOT a tax-advantaged investment account?",
+        "answers": [
+          "401(k)",
+          "Roth IRA",
+          "Savings Account",
+          "ISA"
+        ],
+        "correctAnswerIndex": 2
+      }
+    ]
+  },
+  {
+    "course": "frugality",
+    "questions": [
+      {
+        "question": "Which is a smart way to save money on groceries?",
+        "answers": [
+          "Shop while hungry",
+          "Make a shopping list and stick to it",
+          "Buy everything in bulk",
+          "Avoid comparing prices"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "What is a common habit of frugal people?",
+        "answers": [
+          "Tracking their spending",
+          "Spending freely on trends",
+          "Using credit cards for rewards and never paying them off",
+          "Not saving any money"
+        ],
+        "correctAnswerIndex": 0
+      }
+    ]
+  },
+  {
+    "course": "loan",
+    "questions": [
+      {
+        "question": "What should you consider before taking an education loan?",
+        "answers": [
+          "Interest rate and repayment terms",
+          "How much your friends are borrowing",
+          "Whether you like the name of the bank",
+          "If it includes a free T-shirt"
+        ],
+        "correctAnswerIndex": 0
+      },
+      {
+        "question": "When should you ideally start repaying your student loan?",
+        "answers": [
+          "After you graduate and start earning",
+          "Immediately after taking it",
+          "Never",
+          "Only when you feel like it"
+        ],
+        "correctAnswerIndex": 0
+      }
+    ]
+  }
+]
