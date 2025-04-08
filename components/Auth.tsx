@@ -66,7 +66,10 @@ export default function Auth() {
                         value={password}
                         placeholder="Password"
                         placeholderTextColor="gray"
-                        autoCapitalize={'none'}/>
+                        autoCapitalize={'none'}
+                        secureTextEntry={true}
+                        
+                        />
             </View>
             
             <View style={[styles.verticallySpaced, styles.mt20]}>
