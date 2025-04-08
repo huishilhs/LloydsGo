@@ -68,7 +68,7 @@ export default function RewardsScreen() {
       id: 1,
       title: 'M&S',
       subtitle: 'Get 5% Cash back with Lloyds Bank',
-      image: require('../../assets/images/M&S_logo.png'),
+      image: require('../../assets/images/ms_logo.png'),
     },
     {
       id: 2,
