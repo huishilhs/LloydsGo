@@ -98,7 +98,7 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
-        name="/index"
+        name="index"
         options={{
           href: null, // Hides the tab
         }}
