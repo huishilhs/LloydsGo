@@ -78,7 +78,7 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
-        name="ai/index" // Maps to app/(tabs)/ai/index.tsx
+        name="ai" // Maps to app/(tabs)/ai/index.tsx
         options={{
           title: 'AI',
           headerShown: false,
