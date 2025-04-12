@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { Alert, StyleSheet, View, AppState, Text, TextInput } from 'react-native'
+import { Alert, StyleSheet, View, AppState, Text } from 'react-native'
 import { supabase } from '../lib/supabase'
 import { Button, Input } from '@rneui/themed'
+import globalStyles from '../assets/styles/global'
 import { color } from '@rneui/themed/dist/config'
+import CTextInput from './CTextInput'
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -50,33 +52,34 @@ export default function Auth() {
     return (
         <View style={styles.container}>
             <View>
-                <Text style={styles.header}>Login here</Text>
-                <Text style={styles.subheader}>Welcome back you’ve been missed!</Text>
-                    <TextInput
-                        style={styles.inputBox}
+                <View style={styles.headingContainer}>
+                    <Text style={styles.header}>Login here</Text>
+                    <Text style={styles.subheader}>Welcome back you’ve been missed!</Text>
+                </View>
+                <View style={styles.inputContainer}>
+                    <CTextInput
+                        style={globalStyles.textInput}
                         onChangeText={(text) => setEmail(text)}
                         value={email}
                         placeholder="Email"
-                        placeholderTextColor="gray"
                         autoCapitalize={'none'} />
                     
-                    <TextInput 
-                        style={styles.inputBox}
+                    <CTextInput 
+                        style={globalStyles.textInput}
                         onChangeText={(text) => setPassword(text)}
                         value={password}
                         placeholder="Password"
-                        placeholderTextColor="gray"
                         autoCapitalize={'none'}
                         secureTextEntry={true}
-                        
                         />
+                </View>
             </View>
             
-            <View style={[styles.verticallySpaced, styles.mt20]}>
-                <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
+            <View style={[styles.buttonWrapper, styles.mt20]}>
+                <Button color={"#18B67C"} title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
             </View>
-            <View style={styles.verticallySpaced}>
-                <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+            <View style={styles.buttonWrapper}>
+                <Button color={"#18B67C"}  title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
             </View>
         </View>
     )
@@ -84,13 +87,25 @@ export default function Auth() {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 40,
-        padding: 12,
+        paddingTop: "25%",
+        display: 'flex',
+        flex: 1,
+        paddingHorizontal: "7%",
+        backgroundColor: '#F3F3F3',
     },
-    verticallySpaced: {
+    headingContainer: {
+        height: "40%",
+        width: "75%",
+        marginHorizontal: "auto",
+    },
+    inputContainer: {
+        marginTop: "10%",
+    },
+    buttonWrapper: {
         paddingTop: 4,
         paddingBottom: 4,
         alignSelf: 'stretch',
+        borderRadius: 10,
     },
     mt20: {
         marginTop: 20,
@@ -103,14 +118,9 @@ const styles = StyleSheet.create({
     },
     subheader: {
         fontSize: 20,
+        fontWeight: 'bold',
         textAlign: 'center',
-        marginTop: 20,
+        marginTop: 25,
         marginBottom: 20,
-    },
-    inputBox: {
-        borderWidth: 1,
-        margin: 20,
-        padding: 15,
-        borderRadius: 10,
     },
 })
