@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert, StyleSheet, View, AppState, Text } from 'react-native'
+import { Alert, StyleSheet, View, AppState, Text, TouchableOpacity } from 'react-native'
 import { supabase } from '../lib/supabase'
 import { Button, Input } from '@rneui/themed'
 import globalStyles from '../assets/styles/global'
@@ -65,7 +65,7 @@ export default function Auth() {
                         autoCapitalize={'none'} />
                     
                     <CTextInput 
-                        style={globalStyles.textInput}
+                        style={[globalStyles.textInput, styles.mt20]}
                         onChangeText={(text) => setPassword(text)}
                         value={password}
                         placeholder="Password"
@@ -74,12 +74,16 @@ export default function Auth() {
                         />
                 </View>
             </View>
+
+            <TouchableOpacity onPress={() => {/* Do Something */}}>
+                <Text style={styles.passwordResetButton}>Forgot your password?</Text>
+            </TouchableOpacity>
             
             <View style={[styles.buttonWrapper, styles.mt20]}>
-                <Button color={"#18B67C"} title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
+                <Button buttonStyle={styles.button} color={"#18B67C"} title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
             </View>
-            <View style={styles.buttonWrapper}>
-                <Button color={"#18B67C"}  title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+            <View style={[styles.buttonWrapper, styles.mt10]}>
+                <Button buttonStyle={[styles.button]} color={"#18B67C"}  title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
             </View>
         </View>
     )
@@ -90,7 +94,7 @@ const styles = StyleSheet.create({
         paddingTop: "25%",
         display: 'flex',
         flex: 1,
-        paddingHorizontal: "7%",
+        paddingHorizontal: "8%",
         backgroundColor: '#F3F3F3',
     },
     headingContainer: {
@@ -101,11 +105,8 @@ const styles = StyleSheet.create({
     inputContainer: {
         marginTop: "10%",
     },
-    buttonWrapper: {
-        paddingTop: 4,
-        paddingBottom: 4,
-        alignSelf: 'stretch',
-        borderRadius: 10,
+    mt10: {
+        marginTop: 10,
     },
     mt20: {
         marginTop: 20,
@@ -123,4 +124,25 @@ const styles = StyleSheet.create({
         marginTop: 25,
         marginBottom: 20,
     },
+    passwordResetButton: {
+        color: '#18B67C',
+        textAlign: 'center',
+        fontWeight: '600',
+        marginVertical: 10,
+    },
+    buttonWrapper: {
+        marginTop: 4,
+        marginBottom: 4,
+        alignSelf: 'stretch',
+        borderRadius: 8,
+        shadowColor: '#1E90FF', // DodgerBlue
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.25,
+        shadowRadius: 6,
+        elevation: 5, // ← for Android
+    },
+    button: {
+        paddingVertical: 10,
+        borderRadius: 8,
+    }
 })
