@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     passwordResetButton: {
         color: '#18B67C',
         textAlign: 'center',
-        fontWeight: '600',
+        fontWeight: '700',
         marginVertical: 10,
     },
     buttonWrapper: {
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         elevation: 5, // ← for Android
     },
     button: {
-        paddingVertical: 10,
+        paddingVertical: 12,
         borderRadius: 8,
     }
 })
