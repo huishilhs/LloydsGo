@@ -82,9 +82,9 @@ export default function Auth() {
             <View style={[styles.buttonWrapper, styles.mt20]}>
                 <Button buttonStyle={styles.button} color={"#18B67C"} title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
             </View>
-            <View style={[styles.buttonWrapper, styles.mt10]}>
+            {/* <View style={[styles.buttonWrapper, styles.mt10]}>
                 <Button buttonStyle={[styles.button]} color={"#18B67C"}  title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
-            </View>
+            </View> */}
         </View>
     )
 } 
