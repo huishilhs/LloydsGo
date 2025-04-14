@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 export default function SpendInsightsCard() {
     const currentMonth = new Date().toLocaleString('default', { month: 'long' });
@@ -49,7 +50,7 @@ export default function SpendInsightsCard() {
       <View style={styles.separator} />
 
       {/* Footer Link: text + arrow on the same row */}
-      <TouchableOpacity style={styles.footerLink}>
+      <TouchableOpacity style={styles.footerLink} onPress={() => router.navigate('/home/spending-insights')}>
         <Text style={styles.footerLinkText}>View my spending</Text>
         <Ionicons
           name="arrow-forward"

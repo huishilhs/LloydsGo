@@ -53,7 +53,7 @@ const HomePage = () => {
 
       <View style={styles.container}>
       {/* Debt Controls Card */}
-      <TouchableOpacity style={styles.card} onPress={() => router.navigate('/home/spending-insights')}>
+      <TouchableOpacity style={styles.card} onPress={() => []}>
         {/* Left side: title + subtitle */}
         <View style={styles.textWrapper}>
           <Text style={styles.title}>Debt Controls</Text>
