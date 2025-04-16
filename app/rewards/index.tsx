@@ -86,7 +86,7 @@ export default function RewardsScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollContainer}>
+      <ScrollView contentContainerStyle={{ paddingLeft: 16, paddingRight: 16 }}>
         <Greeting username='John' avatarUrl='' />
         {/* Points Section */}
         <Card style={styles.card}>
@@ -233,10 +233,6 @@ export default function RewardsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  scrollContainer: {
-    paddingHorizontal: 16,
-    paddingTop: 16
   },
   card: {
     marginBottom: 16,

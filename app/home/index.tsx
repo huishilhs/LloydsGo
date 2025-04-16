@@ -6,7 +6,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  ImageBackground,
+  SafeAreaView,
   Button
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -26,7 +26,8 @@ const HomePage = () => {
   const yearlySavings = 1307.52;
   const router = useRouter();
   return (
-     <ScrollView style={styles.container} contentContainerStyle={{ paddingLeft: 16, paddingRight: 16, paddingTop: 45 }}>
+    <SafeAreaView style={styles.container} >
+     <ScrollView contentContainerStyle={{ paddingLeft: 16, paddingRight: 16 }}>
       {/* Header / Greeting */}
       <Greeting username='John' avatarUrl='' />
       <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
@@ -80,6 +81,7 @@ const HomePage = () => {
     </View>
 
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
