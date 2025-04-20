@@ -54,7 +54,7 @@ export default function RootLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#6CF478',
+        tabBarActiveTintColor: '#18B67C',
       }}
     >
       <Tabs.Screen
@@ -78,7 +78,7 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
-        name="ai/index" // Maps to app/(tabs)/ai/index.tsx
+        name="ai" // Maps to app/(tabs)/ai/index.tsx
         options={{
           title: 'AI',
           headerShown: false,
@@ -95,6 +95,12 @@ export default function RootLayout() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="trending-up" color={color} size={size} />
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="index"
+        options={{
+          href: null, // Hides the tab
         }}
       />
     </Tabs>

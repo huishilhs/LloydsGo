@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, ScrollView, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView, ScrollView, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {
-  Appbar,
   Card,
   Text,
   ProgressBar,
   Button,
-  Divider,
-  useTheme
 } from 'react-native-paper';
-import { useRoute, RouteProp } from '@react-navigation/native';
 import Greeting from '@/components/Greeting';
 import { router, useLocalSearchParams } from 'expo-router';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 type Course = {
   key: string;
@@ -52,46 +50,43 @@ export default function RewardsScreen() {
   const redeemOffers = [
     {
       id: 1,
-      title: 'Greggs',
-      subtitle: 'Get A Free Meal Deal'
+      title: 'Sainsbury',
+      subtitle: 'Get A Free Meal Deal',
+      image: require('../../assets/images/sainsbury_logo.png'),
     },
     {
       id: 2,
       title: 'Greggs',
-      subtitle: 'Get A Free Drink'
+      subtitle: 'Get A Free Drink',
+      image: require('../../assets/images/greggs_logo.jpg'),
     },
-    {
-      id: 3,
-      title: 'Greggs',
-      subtitle: 'Get A Free Drink'
-    },
-    {
-      id: 4,
-      title: 'Greggs',
-      subtitle: 'Get A Free Drink'
-    }
   ];
+  
+  
   const moreOffers = [
     {
-      id: 3,
+      id: 1,
       title: 'M&S',
-      subtitle: 'Get 5% Cash back with Lloyds Bank'
+      subtitle: 'Get 5% Cash back with Lloyds Bank',
+      image: require('../../assets/images/ms_logo.png'),
     },
     {
-      id: 4,
+      id: 2,
       title: 'Boots',
-      subtitle: 'Get 10% off with Advantage Card'
+      subtitle: 'Get 10% off with Advantage Card',
+      image: require('../../assets/images/boots_logo.png'),
     },
     {
-      id: 5,
-      title: 'Coach',
-      subtitle: 'Up to 60% off + Extra 20% Off Almost Everything'
-    }
+      id: 3,
+      title: 'The North Face',
+      subtitle: 'Get 30% off on orders over £200',
+      image: require('../../assets/images/the_north_face_logo.png'),
+    },
   ];
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollContainer}>
+      <ScrollView contentContainerStyle={{ paddingLeft: 16, paddingRight: 16 }}>
         <Greeting username='John' avatarUrl='' />
         {/* Points Section */}
         <Card style={styles.card}>
@@ -191,30 +186,45 @@ export default function RewardsScreen() {
 
         {/* Redeem Offers */}
         <Card style={styles.card}>
-          <Card.Title title="Redeem Offers" />
-          
-          <Card.Content>
-          <View style={styles.offersRow}>
-            {redeemOffers.map((offer) => (
-              <Card style={[styles.card, styles.offerCard]} key={offer.id}>
-                <Card.Title title={offer.title} subtitle={offer.subtitle} />
-              </Card>
-            ))}
-          </View>
-          </Card.Content>
+        <Card.Title title="Redeem Offers" />
+        <Card.Content>
+        <View style={styles.offerRow}>
+          {redeemOffers.map((offer) => (
+            <View key={offer.id} style={styles.offerItem}>
+              {/* Left: Logo Image */}
+              <Image source={offer.image} style={styles.logoImage} />
+              {/* Middle: Offer Subtitle */}
+              <View style={styles.textContainer}>
+                <Text style={styles.offerSubtitle}>{offer.subtitle}</Text>
+              </View>
+              {/* Right: Tick Icon */}
+              <FontAwesome6 name="check" size={24} color="#4CAF50" style={styles.lockIcon} />
+            </View>
+          ))}
+        </View>
+      </Card.Content>
         </Card>
+
         {/* More Offers */}
         <Card style={styles.card}>
         <Card.Title title="More Offers" />
-        <Card.Content>
-        {moreOffers.map((offer) => (
-          <Card style={styles.card} key={offer.id}>
-            <Card.Title title={offer.title} subtitle={offer.subtitle} />
-          </Card>
-        ))}
+          <Card.Content>
+          <View style={styles.offerRow}>
+            {moreOffers.map((offer) => (
+              <View key={offer.id} style={styles.offerItem}>
+                {/* Left: Logo Image */}
+                <Image source={offer.image} style={styles.logoImage} />
+                {/* Middle: Offer Subtitle */}
+                <View style={styles.textContainer}>
+                  <Text style={styles.offerSubtitle}>{offer.subtitle}</Text>
+                </View>
+                {/* Right: Tick Icon */}
+                <AntDesign name="lock1" size={24} style={styles.lockIcon} />
+              </View>
+            ))}
+          </View>
         </Card.Content>
         </Card>
-        {/* Add any additional sections or components below */}
       </ScrollView>
     </SafeAreaView>
   );
@@ -223,10 +233,6 @@ export default function RewardsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  scrollContainer: {
-    paddingHorizontal: 16,
-    paddingTop: 16
   },
   card: {
     marginBottom: 16,
@@ -275,13 +281,16 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     marginTop: 16
   },
-  offersRow: {
+  offerRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   offerCard: {
-    width: '48%'
+    width: '48%',
+    marginBottom: 16,
+    borderRadius: 8,
+    padding: 8,
   },
   coursesScroll: {
     marginTop: 20,
@@ -341,5 +350,37 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 8,
     color: '#1C4733',
+  },
+  offerItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%', // Adjust for 2 columns (or modify as needed)
+    backgroundColor: '#FFF',
+    padding: 8,
+    borderRadius: 12,
+    marginVertical: 8,
+    // Optionally add shadow/elevation for a card-like effect:
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  logoImage: {
+    width: 40,
+    height: 40,
+    resizeMode: 'contain',
+  },
+  textContainer: {
+    flex: 1,
+    paddingHorizontal: 15,
+  },
+  offerSubtitle: {
+    fontSize: 14,
+    color: '#000',
+  },
+  lockIcon: {
+    // Additional styling if needed (e.g., margin)
+    marginLeft: 8,
   },
 });

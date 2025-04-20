@@ -1,25 +1,32 @@
+// BalanceCard.tsx
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { ImageBackground, View, Text, StyleSheet, Dimensions } from 'react-native';
 
-// Point this to your actual image path
+// Your card background image
 const CARD_BG = require('../assets/images/card_bg.png');
 
-export default function BalanceCard() {
-  const balance = 1657;
-  const last4Digits = '1234';
-  const userName = 'Matthew. W';
+const { width } = Dimensions.get('window');
+// Match the carousel’s pageWidth (screen width minus container padding)
+const PAGE_WIDTH = width - 32;
+const CARD_HEIGHT = 220;
 
+export interface BalanceCardProps {
+  balance: number;
+  last4: string;
+  userName: string;
+}
+
+export default function BalanceCard({ balance, last4, userName }: BalanceCardProps) {
   return (
     <ImageBackground
       source={CARD_BG}
       style={styles.cardContainer}
       imageStyle={styles.cardImageStyle}
     >
-      {/* Text container (on top of the background) */}
       <View style={styles.textContainer}>
         <Text style={styles.balanceLabel}>Balance:</Text>
         <Text style={styles.balanceValue}>£{balance.toLocaleString()}</Text>
-        <Text style={styles.cardNumber}>**** **** **** {last4Digits}</Text>
+        <Text style={styles.cardNumber}>**** **** **** {last4}</Text>
         <Text style={styles.userName}>{userName}</Text>
       </View>
     </ImageBackground>
@@ -27,41 +34,39 @@ export default function BalanceCard() {
 }
 
 const styles = StyleSheet.create({
-    cardContainer: {
-        width: '100%',
-        height: 200,
-        borderRadius: 16,
-        overflow: 'hidden',
-        marginVertical: 16,
-      },
-      cardImageStyle: {
-        resizeMode: 'cover',
-      },
-      textContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingLeft: 20,
-      },
-      // Updated text sizes for Balance label and value
-      balanceLabel: {
-        fontSize: 18, 
-        color: '#FFF',
-        marginBottom: 8,
-        fontWeight: 'bold',
-      },
-      balanceValue: {
-        fontSize: 32,
-        fontWeight: 'bold',
-        color: '#FFF',
-        marginBottom: 50,
-      },
-      cardNumber: {
-        fontSize: 16,
-        color: '#FFF',
-        marginBottom: 4,
-      },
-      userName: {
-        fontSize: 16,
-        color: '#FFF',
-      },
+  cardContainer: {
+    width: '100%',
+    height: 220,
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  cardImageStyle: {
+    resizeMode: 'contain',
+  },
+  textContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingLeft: 20,
+  },
+  balanceLabel: {
+    fontSize: 18,
+    color: '#FFF',
+    marginBottom: 8,
+    fontWeight: 'bold',
+  },
+  balanceValue: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#FFF',
+    marginBottom: 50,
+  },
+  cardNumber: {
+    fontSize: 16,
+    color: '#FFF',
+    marginBottom: 4,
+  },
+  userName: {
+    fontSize: 16,
+    color: '#FFF',
+  },
 });

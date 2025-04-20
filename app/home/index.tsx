@@ -6,44 +6,76 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  ImageBackground,
-  Button
+  SafeAreaView,
+  Dimensions,
 } from 'react-native';
+import { Carousel, Colors } from 'react-native-ui-lib';
 import { Ionicons } from '@expo/vector-icons';
 import Greeting from '@/components/Greeting';
 import BalanceCard from '../../components/BalanceCard';
 import SpendInsightsCard from '@/components/SpendInsightsCard';
 import MilestoneFundsCard from '@/components/MilestoneFundsCard';
-import SpendingInsights from './spending-insights';
 import { supabase } from '../../lib/supabase'
 import { useRouter } from 'expo-router';
 
+const balanceData = [
+  { balance: 1657, last4: '1234', userName: 'Matthew W' },
+  { balance: 2042, last4: '5678', userName: 'Samantha L' },
+  // …
+];
+
 const HomePage = () => {
-  const userName = 'Matthew. W';
-  const balance = 1657;
-  const currency = '£'; // or '$' if needed
-  const monthlySavings = 101.46;
-  const yearlySavings = 1307.52;
+
   const router = useRouter();
+
+  const renderCards = () =>
+    balanceData.map((card, idx) => (
+      <BalanceCard
+        key={idx}
+        balance={card.balance}
+        last4={card.last4}
+        userName={card.userName}
+      />
+    ));
+
+
   return (
-     <ScrollView style={styles.container} contentContainerStyle={{ paddingLeft: 16, paddingRight: 16, paddingTop: 45 }}>
+    <SafeAreaView style={styles.container} >
+     <ScrollView contentContainerStyle={{ paddingLeft: 16, paddingRight: 16 }}>
       {/* Header / Greeting */}
       <Greeting username='John' avatarUrl='' />
-      <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
+      {/* <Button title="Sign Out" onPress={() => supabase.auth.signOut()} /> */}
 
       {/* Spending Score */}
       <View style={styles.spendingScoreContainer}>
         <Text style={styles.spendingScoreTitle}>Spending Score:</Text>
         <View style={styles.spendingScoreRow}>
           <Text style={styles.spendingScoreValue}>You Can Do Better!</Text>
-          <TouchableOpacity>
-            <Text style={styles.linkText}>What Can I Do?</Text>
+          <TouchableOpacity onPress={() => router.push('/home/spending-score')} >
+            <Text style={styles.linkText}>View score</Text>
           </TouchableOpacity>
         </View>
       </View>
 
       {/* Balance Card */}
-      <BalanceCard />
+      <Carousel
+        itemSpacings={16}
+        containerStyle={{ height: 240, marginVertical: 16, width:'100%' }}
+        pageControlPosition={Carousel.pageControlPositions.UNDER}  // ← use UNDER, not BELOW
+        pageControlProps={{
+          // styling the dots:
+          size: 8,
+          spacing: 12,
+          color: Colors.green30,
+          inactiveColor: Colors.grey50,
+          containerStyle: { marginTop: 8 }, // push dots a little down
+          // optional extras:
+          // enlargeActive: true,
+          // limitShownPages: true,
+        }}
+      >
+        {renderCards()}
+      </Carousel>
 
       {/* Spend Insights */}
       <SpendInsightsCard />
@@ -53,10 +85,10 @@ const HomePage = () => {
 
       <View style={styles.container}>
       {/* Debt Controls Card */}
-      <TouchableOpacity style={styles.card} onPress={() => router.navigate('/home/spending-insights')}>
+      <TouchableOpacity style={styles.card} onPress={() => []}>
         {/* Left side: title + subtitle */}
         <View style={styles.textWrapper}>
-          <Text style={styles.title}>Debt Controls</Text>
+          <Text style={styles.title}>Manage Loans</Text>
           <Text style={styles.subtitle}>Analyse your Debts in One Place</Text>
         </View>
         {/* Right side: icon + arrow */}
@@ -80,6 +112,7 @@ const HomePage = () => {
     </View>
 
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -115,7 +148,7 @@ const styles = StyleSheet.create({
 
   // Spending Score
   spendingScoreContainer: {
-    marginTop: 24,
+    marginTop: 15,
     backgroundColor: '#FFF',
     borderRadius: 12,
     padding: 16,

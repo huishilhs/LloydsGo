@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { Alert, StyleSheet, View, AppState, Text, TextInput } from 'react-native'
+import { Alert, StyleSheet, View, AppState, Text, TouchableOpacity } from 'react-native'
 import { supabase } from '../lib/supabase'
 import { Button, Input } from '@rneui/themed'
+import globalStyles from '../assets/styles/global'
 import { color } from '@rneui/themed/dist/config'
+import CTextInput from './CTextInput'
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -50,44 +52,61 @@ export default function Auth() {
     return (
         <View style={styles.container}>
             <View>
-                <Text style={styles.header}>Login here</Text>
-                <Text style={styles.subheader}>Welcome back you’ve been missed!</Text>
-                    <TextInput
-                        style={styles.inputBox}
+                <View style={styles.headingContainer}>
+                    <Text style={styles.header}>Login here</Text>
+                    <Text style={styles.subheader}>Welcome back you’ve been missed!</Text>
+                </View>
+                <View style={styles.inputContainer}>
+                    <CTextInput
+                        style={globalStyles.textInput}
                         onChangeText={(text) => setEmail(text)}
                         value={email}
                         placeholder="Email"
-                        placeholderTextColor="gray"
                         autoCapitalize={'none'} />
                     
-                    <TextInput 
-                        style={styles.inputBox}
+                    <CTextInput 
+                        style={[globalStyles.textInput, styles.mt20]}
                         onChangeText={(text) => setPassword(text)}
                         value={password}
                         placeholder="Password"
-                        placeholderTextColor="gray"
-                        autoCapitalize={'none'}/>
+                        autoCapitalize={'none'}
+                        secureTextEntry={true}
+                        />
+                </View>
             </View>
+
+            <TouchableOpacity onPress={() => {/* Do Something */}}>
+                <Text style={styles.passwordResetButton}>Forgot your password?</Text>
+            </TouchableOpacity>
             
-            <View style={[styles.verticallySpaced, styles.mt20]}>
-                <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
+            <View style={[styles.buttonWrapper, styles.mt20]}>
+                <Button buttonStyle={styles.button} color={"#18B67C"} title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
             </View>
-            <View style={styles.verticallySpaced}>
-                <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
-            </View>
+            {/* <View style={[styles.buttonWrapper, styles.mt10]}>
+                <Button buttonStyle={[styles.button]} color={"#18B67C"}  title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+            </View> */}
         </View>
     )
 } 
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 40,
-        padding: 12,
+        paddingTop: "25%",
+        display: 'flex',
+        flex: 1,
+        paddingHorizontal: "8%",
+        backgroundColor: '#F3F3F3',
     },
-    verticallySpaced: {
-        paddingTop: 4,
-        paddingBottom: 4,
-        alignSelf: 'stretch',
+    headingContainer: {
+        height: "40%",
+        width: "75%",
+        marginHorizontal: "auto",
+    },
+    inputContainer: {
+        marginTop: "10%",
+    },
+    mt10: {
+        marginTop: 10,
     },
     mt20: {
         marginTop: 20,
@@ -100,14 +119,30 @@ const styles = StyleSheet.create({
     },
     subheader: {
         fontSize: 20,
+        fontWeight: 'bold',
         textAlign: 'center',
-        marginTop: 20,
+        marginTop: 25,
         marginBottom: 20,
     },
-    inputBox: {
-        borderWidth: 1,
-        margin: 20,
-        padding: 15,
-        borderRadius: 10,
+    passwordResetButton: {
+        color: '#18B67C',
+        textAlign: 'center',
+        fontWeight: '700',
+        marginVertical: 10,
     },
+    buttonWrapper: {
+        marginTop: 4,
+        marginBottom: 4,
+        alignSelf: 'stretch',
+        borderRadius: 8,
+        shadowColor: '#1E90FF', // DodgerBlue
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.25,
+        shadowRadius: 6,
+        elevation: 5, // ← for Android
+    },
+    button: {
+        paddingVertical: 12,
+        borderRadius: 8,
+    }
 })

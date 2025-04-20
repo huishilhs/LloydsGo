@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 type Props = {
     username: string;
@@ -19,10 +20,12 @@ const Greeting = ({ username, avatarUrl }: Props) => {
     return (
         <View style={styles.container}>
             {/* Profile picture */}
-            <Image
-                source={avatarUrl ? { uri: avatarUrl } : require('../assets/images/default_avatar.jpg')}
-                style={styles.avatar}
-            />
+            <TouchableOpacity onPress={() => router.push('/home/profile')}>
+                <Image
+                    source={avatarUrl ? { uri: avatarUrl } : require('../assets/images/default_avatar.jpg')}
+                    style={styles.avatar}
+                />
+            </TouchableOpacity>
             {/* Greeting and user name */}
             <View style={styles.textContainer}>
                 <Text style={styles.greetingText}>{getGreeting()}</Text>
@@ -47,8 +50,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: 12,
-        backgroundColor: 'rgba(240, 240, 240, 0.7)',
+        backgroundColor: '#FFF',
         borderRadius: 40,
+        marginBottom: 10,
     },
     avatar: {
         width: 50,
