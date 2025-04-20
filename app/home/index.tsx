@@ -51,8 +51,8 @@ const HomePage = () => {
         <Text style={styles.spendingScoreTitle}>Spending Score:</Text>
         <View style={styles.spendingScoreRow}>
           <Text style={styles.spendingScoreValue}>You Can Do Better!</Text>
-          <TouchableOpacity>
-            <Text style={styles.linkText}>What Can I Do?</Text>
+          <TouchableOpacity onPress={() => router.push('/home/spending-score')} >
+            <Text style={styles.linkText}>View score</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -88,7 +88,7 @@ const HomePage = () => {
       <TouchableOpacity style={styles.card} onPress={() => []}>
         {/* Left side: title + subtitle */}
         <View style={styles.textWrapper}>
-          <Text style={styles.title}>Debt Controls</Text>
+          <Text style={styles.title}>Manage Loans</Text>
           <Text style={styles.subtitle}>Analyse your Debts in One Place</Text>
         </View>
         {/* Right side: icon + arrow */}

@@ -47,7 +47,7 @@ const VictoryGauge: React.FC<GaugeProps> = ({ score , size }) => {
       {/* We'll layer VictoryPie and an SVG that draws the needle.
           You can do this in one SVG if you prefer, but layering
           can be simpler for some layouts. */}
-      <View style={{ width: size, height: size / 2 }}>
+      <View style={{ width: size, height: size / 2, marginBottom: 30 }}>
         <VictoryPie
           width={size}
           height={size}         // Let VictoryPie think it's in a square
@@ -55,7 +55,7 @@ const VictoryGauge: React.FC<GaugeProps> = ({ score , size }) => {
           data={data}
           startAngle={270}
           endAngle={450}
-          innerRadius={50}     // Adjust for thickness
+          innerRadius={70}     // Adjust for thickness
           colorScale={['#FFA500', '#9EE37D', '#5EC279']}
           labels={() => null}   // Hide slice labels
           animate={{ duration: 500 }}
@@ -74,7 +74,7 @@ const VictoryGauge: React.FC<GaugeProps> = ({ score , size }) => {
               x1={radius}
               y1={radius}
               x2={radius}
-              y2={radius - 40} // how long the needle is
+              y2={radius - 60} // how long the needle is
               stroke="black"
               strokeWidth={2}
               strokeLinecap="round"
@@ -114,6 +114,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   scoreText: {
-    fontSize: 20,
+    fontSize: 30,
   }
 });
