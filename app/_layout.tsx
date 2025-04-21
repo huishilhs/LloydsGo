@@ -88,7 +88,7 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
-        name="invest/index" // Maps to app/(tabs)/invest/index.tsx
+        name="invest" // Maps to app/(tabs)/invest/index.tsx
         options={{
           title: 'Invest',
           headerShown: false,
