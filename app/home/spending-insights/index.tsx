@@ -125,6 +125,20 @@ const monthMap: Record<string, number> = {
 };
 const REFERENCE_YEAR = 2024;
 
+// RoundUpPage.tsx (or SpendingInsightsScreen.tsx)
+const categoryLimits: Record<string, number> = {
+  Food: 100.00,
+  Utility: 75.00,
+  Transfer: 500.00,
+  Leisure: 50.00,
+  Shopping: 200.00,
+  Saving: 1500,
+  Health: 50,
+  Gambling: 1000,
+  Life_event: 100
+};
+
+
 function parseChipToRange(chip: string, timeRange: 'Day' | 'Week' | 'Month' | 'Year'): [Date, Date] {
   // Use REFERENCE_YEAR for Day and Week chips
   if (timeRange === 'Day') {
@@ -393,15 +407,29 @@ export default function SpendingInsightsScreen() {
           {categoryBreakdown.length === 0 ? (
             <Text>No transactions found for this period.</Text>
           ) : (
-            categoryBreakdown.filter(item => item.out > 0).map((item) => (
-              <View key={item.category} style={styles.categoryRow}>
-                <Text style={styles.categoryName}>{item.category}</Text>
-                <Text style={styles.categoryAmount}>
-                  -£{Math.abs(item.out).toFixed(2)}
-                </Text>
-              </View>
-            ))
+            categoryBreakdown
+              .filter(item => item.out > 0)
+              .map((item) => {
+                const spent = item.out;
+                const limit = categoryLimits[item.category] ?? Infinity;
+                const isUnder = spent <= limit;
+                return (
+                  <View key={item.category} style={styles.categoryRow}>
+                    {/* Status circle */}
+                    <View
+                      style={[
+                        styles.statusCircle,
+                        { backgroundColor: isUnder ? '#18B67C' : '#FF0000' },
+                      ]}
+                    />
+                    <Text style={styles.categoryName}>{item.category}</Text>
+                    <Text style={styles.categoryAmount}>-£{spent.toFixed(2)}</Text>
+                  </View>
+                );
+              })
           )}
+
+
           <Subheading style={styles.subheading}>Money In</Subheading>
           {categoryBreakdown.length === 0 ? (
             <Text>No transactions found for this period.</Text>
@@ -482,10 +510,17 @@ const styles = StyleSheet.create({
   },
   categoryRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
     marginVertical: 4,
   },
+  statusCircle: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    marginRight: 8,
+  },
   categoryName: {
+    flex: 1,
     fontSize: 14,
     color: '#333',
   },
