@@ -88,6 +88,7 @@ const goalsData = [
     saveButton: {
       marginTop: 20,
       borderRadius: 8,
+      backgroundColor: '#18B67C'
     },
   });
   
