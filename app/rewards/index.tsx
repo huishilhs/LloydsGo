@@ -186,7 +186,9 @@ export default function RewardsScreen() {
 
         {/* Redeem Offers */}
         <Card style={styles.card}>
-        <Card.Title title="Redeem Offers" />
+        <TouchableOpacity onPress={() => router.push('/rewards/redeem-rewards')}>
+          <Card.Title title="Redeem Offers"/>
+        </TouchableOpacity>
         <Card.Content>
         <View style={styles.offerRow}>
           {redeemOffers.map((offer) => (

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Dimensions,
+  Button
 } from 'react-native';
 import { Carousel, Colors } from 'react-native-ui-lib';
 import { Ionicons } from '@expo/vector-icons';
@@ -50,7 +51,7 @@ const HomePage = () => {
       <View style={styles.spendingScoreContainer}>
         <Text style={styles.spendingScoreTitle}>Spending Score:</Text>
         <View style={styles.spendingScoreRow}>
-          <Text style={styles.spendingScoreValue}>You Can Do Better!</Text>
+          <Text style={styles.spendingScoreValue}>Great job managing money!</Text>
           <TouchableOpacity onPress={() => router.push('/home/spending-score')} >
             <Text style={styles.linkText}>View score</Text>
           </TouchableOpacity>
