@@ -16,6 +16,10 @@ export default function HomeLayout() {
         name="profile/index"
         options={{ title: 'Profile', headerBackTitle: 'Home'}}
       />
+      <Stack.Screen
+        name="manage-loan/index"
+        options={{ title: 'Manage Loans', headerBackTitle: 'Home'}}
+      />
     </Stack>
   );
 }

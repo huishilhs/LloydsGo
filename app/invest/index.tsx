@@ -14,6 +14,8 @@ import { Card } from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons';
 import Greeting from '@/components/Greeting';
 import ScoreGauge from '@/components/ScoreGauge';
+import RoundUpCard from '@/components/RoundUpCard';
+import { router } from 'expo-router';
 
 /**
  * Sample Data
@@ -45,33 +47,7 @@ const HomeScreen = () => {
       <ScrollView contentContainerStyle={{ paddingLeft: 16, paddingRight: 16 }}>
       <Greeting username='John' avatarUrl='' />
         {/* ROUND-UP SAVING */}
-        <View style={styles.roundUpCard}>
-        <View style={styles.header}>
-            <Text style={styles.sectionTitle}>Round-Up Saving:</Text>
-          </View>
-          <View style={styles.logoContainer}>
-            <Image
-              source={require('../../assets/images/logo.png')}
-              style={styles.logo}
-              resizeMode="contain"
-            />
-          </View>
-          <Text style={styles.savedText}>So far, you've saved</Text>
-
-          <View style={styles.amountsContainer}>
-            <View style={styles.amountBox}>
-              <Text style={styles.amountText}>£{data.totalSavedMonth}</Text>
-              <Text style={styles.periodText}>This month</Text>
-            </View>
-
-            <View style={styles.divider} />
-
-            <View style={styles.amountBox}>
-              <Text style={styles.amountText}>£{data.totalSavedYear}</Text>
-              <Text style={styles.periodText}>This year</Text>
-            </View>
-          </View>
-        </View>
+        <RoundUpCard totalSavedMonth={'11.46'} totalSavedYear={'137.52'}/>
 
         {/* TRADE / DISCOVER TABS */}
         <View style={styles.tabContainer}>
