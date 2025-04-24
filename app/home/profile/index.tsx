@@ -6,7 +6,6 @@ import {
   Button,
   RadioButton,
 } from 'react-native-paper';
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 const titleOptions = ['Mr', 'Mrs', 'Miss', 'Dr', 'Other'];
@@ -14,14 +13,14 @@ const occupationOptions = ['Full-time employed', 'Part-time employed', 'Student'
 
 export default function ProfileScreen() {
   const [form, setForm] = useState({
-    title: '',
-    firstName: '',
-    lastName: '',
-    dob: '',
-    city: '',
-    income: '',
-    budget: '',
-    occupation: '',
+    title: 'Mr',
+    firstName: 'Benjamin',
+    lastName: 'Ahmed',
+    dob: '04/03/1986',
+    city: '3 Paula mission South Justin LL3 7XE',
+    income: '3,837.85',
+    budget: '1,423.00',
+    occupation: 'Full-time employed',
   });
 
   return (
@@ -183,5 +182,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 25,
     paddingVertical: 6,
+    backgroundColor: "#18B67C",
   },
 });
