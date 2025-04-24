@@ -14,9 +14,11 @@ export interface BalanceCardProps {
   balance: number;
   last4: string;
   userName: string;
+  productName: string;
 }
 
-export default function BalanceCard({ balance, last4, userName }: BalanceCardProps) {
+export default function BalanceCard({ balance, last4, userName, productName }: BalanceCardProps) {
+  console.log('BalanceCard props:', { balance, last4, userName, productName });
   return (
     <ImageBackground
       source={CARD_BG}
@@ -24,7 +26,7 @@ export default function BalanceCard({ balance, last4, userName }: BalanceCardPro
       imageStyle={styles.cardImageStyle}
     >
       <View style={styles.textContainer}>
-        <Text style={styles.balanceLabel}>Balance:</Text>
+        <Text style={styles.balanceLabel}>{productName}</Text>
         <Text style={styles.balanceValue}>£{balance.toLocaleString()}</Text>
         <Text style={styles.cardNumber}>**** **** **** {last4}</Text>
         <Text style={styles.userName}>{userName}</Text>

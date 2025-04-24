@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import {MaterialIcons,MaterialCommunityIcons , AntDesign} from '@expo/vector-icons'
 import { router } from 'expo-router';
 
 export default function SpendInsightsCard() {
@@ -9,7 +9,7 @@ export default function SpendInsightsCard() {
     <View style={styles.card}>
       {/* Title and Subtitle */}
       <Text style={styles.title}>Spend insights</Text>
-      <Text style={styles.subtitle}>$29.62 in {currentMonth}</Text>
+      <Text style={styles.subtitle}>£3842.17 in {currentMonth}</Text>
 
       {/* Chart Row */}
       <View style={styles.chartRow}>
@@ -17,7 +17,7 @@ export default function SpendInsightsCard() {
         <View style={styles.columnWrapper}>
           {/* Wider column with custom height */}
           <View style={[styles.iconBlock, { height: 30}]}>
-            <Ionicons name="briefcase-outline" size={24} color="#333" />
+            <MaterialIcons name="payments" size={30} color="black" />
           </View>
           <View style={[styles.columnBlock, { height: 60 }]}>
             <Text style={styles.columnLabel}>2</Text>
@@ -28,7 +28,7 @@ export default function SpendInsightsCard() {
         {/* Second Column */}
         <View style={styles.columnWrapper}>
         <View style={[styles.iconBlock, { height: 30 }]}>
-            <Ionicons name="airplane-outline" size={40} color="#333" />
+           <MaterialIcons name="subscriptions" size={30} color="black" />
           </View>
           <View style={[styles.columnBlock, { height: 80 }]}>
             <Text style={styles.columnLabel}>1</Text>
@@ -38,7 +38,7 @@ export default function SpendInsightsCard() {
         {/* Third Column */}
         <View style={styles.columnWrapper}>
         <View style={[styles.iconBlock, { height: 30 }]}>
-            <Ionicons name="car-outline" size={24} color="#333" />
+            <MaterialCommunityIcons name="party-popper" size={35} color="black" />
           </View>
           <View style={[styles.columnBlock, { height: 50 }]}>
                 <Text style={styles.columnLabel}>3</Text>
@@ -52,12 +52,7 @@ export default function SpendInsightsCard() {
       {/* Footer Link: text + arrow on the same row */}
       <TouchableOpacity style={styles.footerLink} onPress={() => router.navigate('/home/spending-insights')}>
         <Text style={styles.footerLinkText}>View my spending</Text>
-        <Ionicons
-          name="arrow-forward"
-          size={16}
-          color="#000"
-          style={styles.footerLinkIcon}
-        />
+        <AntDesign name="arrowright" size={16} color="black" style={styles.footerLinkIcon} />
       </TouchableOpacity>
     </View>
   );

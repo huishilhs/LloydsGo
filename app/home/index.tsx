@@ -17,17 +17,28 @@ import MilestoneFundsCard from '@/components/MilestoneFundsCard';
 import { supabase } from '../../lib/supabase';
 import { useRouter } from 'expo-router';
 
-const balanceData = [
-  { balance: 1657, last4: '1234', userName: 'Matthew W' },
-  { balance: 2042, last4: '5678', userName: 'Samantha L' },
-];
+type Product = {
+  product_name: string;
+  product_type: string;
+};
+
+type Account = {
+  account_id: string;
+  customer_id: string | number;
+  product_id: number;
+  starting_balance: number;
+  since: string;
+  products?: Product;
+};
+
 
 const HomePage = () => {
   const router = useRouter();
   const [userName, setUserName] = useState<string | null>(null);
+  const [accounts, setAccounts] = useState<Account[]>([]);
 
   useEffect(() => {
-    const fetchUserName = async () => {
+    const fetchData = async () => {
       const {
         data: { user },
         error: userError,
@@ -40,30 +51,62 @@ const HomePage = () => {
   
       const { data: customer, error: customerError } = await supabase
         .from('customers')
-        .select('name')
+        .select('customer_id, name')
         .eq('user_id', user.id)
         .single();
   
-      if (customerError) {
-        console.error('Customer fetch error:', customerError.message);
+      // console.log('CUSTOMER:', customer);
+  
+      if (customerError || !customer) {
+        console.error('Customer fetch error:', customerError?.message || 'Customer not found');
+        return;
+      }
+  
+      setUserName(customer.name);
+  
+      const { data: accountList, error: accountError } = await supabase
+      .from('accounts')
+      .select(`
+        account_id,
+        customer_id,
+        product_id,
+        starting_balance,
+        since,
+        products:product_id (
+          product_name,
+          product_type
+        )
+      `)
+      .eq('customer_id', String(customer.customer_id));    
+    
+      console.log('ACCOUNTS:', accountList);
+  
+      if (accountError) {
+        console.error('Account fetch error:', accountError.message);
       } else {
-        setUserName(customer.name);
+        setAccounts(accountList as unknown as Account[]);
       }
     };
   
-    fetchUserName();
+    fetchData();
   }, []);
   
 
   const renderCards = () =>
-    balanceData.map((card, idx) => (
-      <BalanceCard key={idx} balance={card.balance} last4={card.last4} userName={card.userName} />
+    accounts.map((account) => (
+      <BalanceCard
+        key={account.account_id}
+        balance={account.starting_balance}
+        last4={String(account.product_id).slice(-4)}
+        userName={userName || 'User'}
+        productName={account.products?.product_name || 'Unknown Product'}
+      />
     ));
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{ paddingLeft: 16, paddingRight: 16 }}>
-        <Greeting username={userName || '...'} avatarUrl='' />
+        <Greeting username={userName || '...'} avatarUrl="" />
         {/* <Button title="Sign Out" onPress={() => supabase.auth.signOut()} /> */}
 
         <View style={styles.spendingScoreContainer}>
@@ -123,70 +166,40 @@ const HomePage = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F5F5F5",
-  },
+  container: { flex: 1, backgroundColor: '#F5F5F5' },
   spendingScoreContainer: {
     marginTop: 15,
-    backgroundColor: "#FFF",
+    backgroundColor: '#FFF',
     borderRadius: 12,
     padding: 16,
   },
-  spendingScoreTitle: {
-    fontSize: 16,
-    fontWeight: "600",
-    marginBottom: 8,
-  },
+  spendingScoreTitle: { fontSize: 16, fontWeight: '600', marginBottom: 8 },
   spendingScoreRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  spendingScoreValue: {
-    fontSize: 16,
-    fontWeight: "400",
-    color: "#E67E22",
-  },
-  linkText: {
-    fontSize: 14,
-    color: "#3498DB",
-  },
+  spendingScoreValue: { fontSize: 16, fontWeight: '400', color: '#E67E22' },
+  linkText: { fontSize: 14, color: '#3498DB' },
   card: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#FFF",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
     borderRadius: 12,
     padding: 16,
     marginVertical: 8,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 3,
     elevation: 1,
   },
-  textWrapper: {
-    flex: 1,
-    marginRight: 12,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#333",
-    marginBottom: 4,
-  },
-  subtitle: {
-    fontSize: 14,
-    color: "#666",
-  },
-  iconRow: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  mainIcon: {
-    marginRight: 8,
-  },
+  textWrapper: { flex: 1, marginRight: 12 },
+  title: { fontSize: 16, fontWeight: 'bold', color: '#333', marginBottom: 4 },
+  subtitle: { fontSize: 14, color: '#666' },
+  iconRow: { flexDirection: 'row', alignItems: 'center' },
+  mainIcon: { marginRight: 8 },
 });
 
 export default HomePage;

@@ -135,7 +135,8 @@ const categoryLimits: Record<string, number> = {
   Saving: 1500,
   Health: 50,
   Gambling: 1000,
-  Life_event: 100
+  Life_event: 100,
+  Monthly_fees: 1000
 };
 
 
