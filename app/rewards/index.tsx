@@ -87,7 +87,7 @@ export default function RewardsScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{ paddingLeft: 16, paddingRight: 16 }}>
-        <Greeting username='John' avatarUrl='' />
+        <Greeting username='Benjamin' avatarUrl='' />
         {/* Points Section */}
         <Card style={styles.card}>
           <Card.Title title="Lloyds points" />
@@ -186,13 +186,11 @@ export default function RewardsScreen() {
 
         {/* Redeem Offers */}
         <Card style={styles.card}>
-        <TouchableOpacity onPress={() => router.push('/rewards/redeem-rewards')}>
           <Card.Title title="Redeem Offers"/>
-        </TouchableOpacity>
         <Card.Content>
         <View style={styles.offerRow}>
           {redeemOffers.map((offer) => (
-            <View key={offer.id} style={styles.offerItem}>
+            <TouchableOpacity key={offer.id} style={styles.offerItem} onPress={() => router.push('/rewards/redeem-rewards')}>
               {/* Left: Logo Image */}
               <Image source={offer.image} style={styles.logoImage} />
               {/* Middle: Offer Subtitle */}
@@ -201,7 +199,7 @@ export default function RewardsScreen() {
               </View>
               {/* Right: Tick Icon */}
               <FontAwesome6 name="check" size={24} color="#4CAF50" style={styles.lockIcon} />
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
       </Card.Content>

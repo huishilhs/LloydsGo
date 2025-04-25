@@ -61,7 +61,7 @@ const AiPage = () => {
             content: `${context}\n${message}`,
           },
         ],
-        max_tokens: 40,
+        max_tokens: 150,
       };
   
       // Replace the endpoint URL with Deepseek's answer endpoint
@@ -82,7 +82,7 @@ const AiPage = () => {
       }
   
       const data = await response.json();
-      console.log("Parsed Deepseek response data:", data); // Log the parsed JSON
+
   
       // Check that the data has the expected structure:
       if (
@@ -92,7 +92,7 @@ const AiPage = () => {
         data.choices[0].message &&
         data.choices[0].message.content
       ) {
-        return data.choices[0].message.content.trim();
+        return data.choices[0].message.content.replace(/\*\*/g, '').trim();
       } else {
         console.error("Deepseek response missing expected fields:", data);
         return "I'm having trouble generating a response right now. Please try again later.";
@@ -134,30 +134,34 @@ const AiPage = () => {
       },
     };
     setMessages(prev => GiftedChat.append(prev, [botMessage]));
-
-    // Optionally, navigate based on keywords in the user input
-    if (userInput.toLowerCase().includes('invest')) {
-      router.push('/invest');
-    } else if (userInput.toLowerCase().includes('save')) {
-      router.push('/rewards');
-    } else if (userInput.toLowerCase().includes('spending')) {
-      router.push('/home/spending-insights');
-    }
   };
 
   // Handle quick reply selection
-  const handleQuickReply = useCallback((quickReplies: QuickReplyItem[]) => {
-    const { title, value } = quickReplies[0];
-    const userMessage: IMessage = {
-      _id: Math.random(),
-      text: title,
-      createdAt: new Date(),
-      user: { _id: 1, name: 'Matthew.W' },
-    };
-    setMessages(prev => GiftedChat.append(prev, [userMessage]));
-    setConversationContext(prev => prev + `\nUser: ${title}`);
-    handleAIResponse(title);
-  }, [conversationContext]);
+// Handle quick reply selection
+const handleQuickReply = useCallback((quickReplies: QuickReplyItem[]) => {
+  const { title, value } = quickReplies[0];
+  const userMessage: IMessage = {
+    _id: Math.random(),
+    text: title,
+    createdAt: new Date(),
+    user: { _id: 1, name: 'Benjamin' },
+  };
+  setMessages(prev => GiftedChat.append(prev, [userMessage]));
+  setConversationContext(prev => prev + `\nUser: ${title}`);
+  handleAIResponse(title);
+
+  // Navigate based on quick reply value
+  if (value === 'spending_overview') {
+    router.push('/home/spending-insights');
+  } else if (value === 'stocks') {
+    router.push('/invest');
+  } else if (value === 'save_money') {
+    router.push('/rewards');
+  } else if (value === 'budget') {
+    router.push('/rewards');
+  }
+}, [conversationContext]);
+
 
   // Customize chat bubble appearance
   const renderBubble = (props: any) => (
@@ -185,7 +189,7 @@ const AiPage = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Greeting username="John" avatarUrl=""/>
+      <Greeting username="Benjamin" avatarUrl=""/>
       <View style={styles.chatContainer}>
         <GiftedChat
           messages={messages}

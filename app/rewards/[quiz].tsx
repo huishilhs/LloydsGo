@@ -92,20 +92,14 @@ type Question = {
           <Card.Title title={currentQuestion.question} />
           <Card.Content>
             {currentQuestion.answers.map((answer, idx) => (
-              <Button
+              <TouchableOpacity
                 key={idx}
-                mode="contained"
                 onPress={() => handleAnswerPress(idx)}
-                style={styles.answerButton}
+                style={styles.customButton}
               >
-                <Text
-                style={styles.answerText}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-            >
-                {answer}
-            </Text>
-              </Button>
+                <Text style={styles.customButtonText}>{answer}</Text>
+              </TouchableOpacity>
+
             ))}
             {feedback && <Text 
             style={[
@@ -137,17 +131,22 @@ type Question = {
       padding: 16,
       backgroundColor: "#FFF",
     },
-    answerButton: {
-      marginVertical: 10,
-      backgroundColor: "#F8F7F7",
-      borderRadius: 5
+    customButton: {
+      backgroundColor: '#F8F7F7',
+      paddingVertical: 14,
+      paddingHorizontal: 16,
+      borderRadius: 10,
+      marginVertical: 8,
+      alignItems: 'center',
+      alignSelf: 'stretch', 
     },
-    answerText: {
-        fontSize: 16,
-        color: '#000000',
-        flexShrink: 1,
-        textAlign: 'center',
-      },
+    
+    customButtonText: {
+      fontSize: 16,
+      color: '#000',
+      textAlign: 'center',
+      lineHeight: 22,
+    },     
     feedbackText: {
       marginTop: 16,
       fontSize: 18,
